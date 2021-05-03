@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+   db:
+        image: mysql:8.0
+        container_name: mysql
+        hostname: mysql.docker
+        restart: always
+        ports:
+        - '3306:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: TheTharathorn
+        volumes:
+            - ./mysql-data:/var/lib/mysql
+        
+   app:
+        depends_on:
+            - db
+        links: 
+            - db
+        
+        image: phpmyadmin/phpmyadmin
+        hostname: phpmyadmin.docker
+        container_name: phpmyadmin
+        restart: always
+        ports:
+            - '80:80'
+    
+
+
+            
